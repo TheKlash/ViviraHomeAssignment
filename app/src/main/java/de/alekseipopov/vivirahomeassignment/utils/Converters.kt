@@ -2,7 +2,6 @@ package de.alekseipopov.vivirahomeassignment.utils
 
 import de.alekseipopov.vivirahomeassignment.domian.model.SearchResponseModel
 import de.alekseipopov.vivirahomeassignment.network.model.GithubRepoResponse
-import de.alekseipopov.vivirahomeassignment.network.model.GithubRepoResponseItem
 import de.alekseipopov.vivirahomeassignment.ui.model.SearchResponseItem
 
 object Converters {
@@ -32,8 +31,7 @@ object Converters {
         }
 
         return SearchResponseModel(
-            totalCount = githubResponse.total_count.toLong(),
-            repos = reposList.toList()
+            totalCount = githubResponse.total_count.toLong(), repos = reposList.toList()
         )
     }
 

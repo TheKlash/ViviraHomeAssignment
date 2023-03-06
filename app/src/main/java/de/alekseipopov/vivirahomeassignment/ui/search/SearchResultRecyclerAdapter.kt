@@ -9,11 +9,13 @@ class SearchResultRecyclerAdapter(private val onClickListener: SearchResultOnCli
     ListAdapter<SearchResponseItem, SearchResultViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<SearchResponseItem>() {
-        override fun areItemsTheSame(oldItem: SearchResponseItem, newItem: SearchResponseItem): Boolean =
-            oldItem.id == newItem.id
+        override fun areItemsTheSame(
+            oldItem: SearchResponseItem, newItem: SearchResponseItem
+        ): Boolean = oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: SearchResponseItem, newItem: SearchResponseItem): Boolean =
-            oldItem == newItem
+        override fun areContentsTheSame(
+            oldItem: SearchResponseItem, newItem: SearchResponseItem
+        ): Boolean = oldItem == newItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder =

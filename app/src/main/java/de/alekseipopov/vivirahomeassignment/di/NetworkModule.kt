@@ -20,18 +20,13 @@ class NetworkModule {
     fun provideOkHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
+        return OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
     }
 
     @Provides
     @Singleton
-    fun provideGithubRepoApi(okHttpClient: OkHttpClient): GithubRepoApi =
-        Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://api.github.com/")
-            .client(provideOkHttpClient())
-            .build()
+    fun provideGithubRepoApi(): GithubRepoApi =
+        Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://api.github.com/").client(provideOkHttpClient()).build()
             .create(GithubRepoApi::class.java)
 }

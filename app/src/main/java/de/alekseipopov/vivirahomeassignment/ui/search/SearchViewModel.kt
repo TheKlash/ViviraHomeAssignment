@@ -19,34 +19,33 @@ const val RESPONSE_PAGE_SIZE = 30
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     val useCase: SearchRepositoryUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private var CURRENT_PAGE_COUNTER = 1
 
     private val _searchResults = MutableLiveData<List<SearchResponseItem>>()
-    val searchResults : LiveData<List<SearchResponseItem>>
+    val searchResults: LiveData<List<SearchResponseItem>>
         get() = _searchResults
 
     private val _showLoading = MutableLiveData<Boolean>()
-    val showLoading : LiveData<Boolean>
+    val showLoading: LiveData<Boolean>
         get() = _showLoading
 
     private val _showPrevButton = MutableLiveData(false)
-    val showPrevButton : LiveData<Boolean>
+    val showPrevButton: LiveData<Boolean>
         get() = _showPrevButton
 
     private val _showNextButton = MutableLiveData(false)
-    val showNextButton : LiveData<Boolean>
+    val showNextButton: LiveData<Boolean>
         get() = _showNextButton
 
     private val _pageCounter = MutableLiveData<String?>(null)
-    val pageCounter : LiveData<String?>
+    val pageCounter: LiveData<String?>
         get() = _pageCounter
 
     private val _errorMessage = MutableLiveData<String?>(null)
-    val errorMessage : LiveData<String?>
+    val errorMessage: LiveData<String?>
         get() = _errorMessage
-
 
 
     fun resetCounter() {
@@ -68,10 +67,8 @@ class SearchViewModel @Inject constructor(
         val errorHandler = CoroutineExceptionHandler { _, throwable ->
             _errorMessage.value = "Error while making a request"
             _showLoading.value = false
-            if (nextPage)
-                CURRENT_PAGE_COUNTER--
-            if (prevPage)
-                CURRENT_PAGE_COUNTER++
+            if (nextPage) CURRENT_PAGE_COUNTER--
+            if (prevPage) CURRENT_PAGE_COUNTER++
 
         }
         viewModelScope.launch(errorHandler) {
@@ -84,7 +81,9 @@ class SearchViewModel @Inject constructor(
                 _showLoading.value = false
                 _pageCounter.value = CURRENT_PAGE_COUNTER.toString()
                 _showPrevButton.value = CURRENT_PAGE_COUNTER > 1
-                _showNextButton.value = ((CURRENT_PAGE_COUNTER + 1) * CURRENT_PAGE_COUNTER) < (response.totalCount ?: 0L)
+                _showNextButton.value =
+                    ((CURRENT_PAGE_COUNTER + 1) * CURRENT_PAGE_COUNTER) < (response.totalCount
+                        ?: 0L)
                 _searchResults.value = items
             }
         }

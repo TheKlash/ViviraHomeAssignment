@@ -1,9 +1,9 @@
 package de.alekseipopov.vivirahomeassignment.network.model
 
+//I just parsed exampled JSON response through plugin and got this.
+
 data class GithubRepoResponse(
-    val incomplete_results: Boolean,
-    val items: List<GithubRepoResponseItem>,
-    val total_count: Int
+    val incomplete_results: Boolean, val items: List<GithubRepoResponseItem>, val total_count: Int
 )
 
 data class GithubRepoResponseItem(

@@ -23,9 +23,7 @@ class SearchFragment : Fragment() {
     private var adapter: SearchResultRecyclerAdapter? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchBinding.inflate(layoutInflater)
         return binding?.root
@@ -45,8 +43,7 @@ class SearchFragment : Fragment() {
             val onClickListener = object : SearchResultOnClickListener {
                 override fun onClick(view: View, position: Int, item: SearchResponseItem) {
                     val urlIntent = Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse(item.repoUrl)
+                        Intent.ACTION_VIEW, Uri.parse(item.repoUrl)
                     )
                     startActivity(urlIntent)
                 }

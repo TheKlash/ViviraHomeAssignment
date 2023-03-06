@@ -1,8 +1,7 @@
 package de.alekseipopov.vivirahomeassignment.domian.model
 
 data class SearchResponseModel(
-    val totalCount: Long? = null,
-    val repos: List<Repo>? = null
+    val totalCount: Long? = null, val repos: List<Repo>? = null
 ) {
 
     class Repo() {
